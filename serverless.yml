@@ -1,0 +1,80 @@
+console: true
+service: afex-challenge
+plugins: 
+  - serverless-deployment-bucket
+  - serverless-plugin-typescript
+  - serverless-dynamodb-local
+  - serverless-v3-dynamodb-seed
+  - serverless-offline
+
+provider: 
+    name: aws
+    runtime: nodejs16.x
+    stage: ${opt:stage, 'dev'}
+    region: ${opt:region, 'us-east-1'}
+
+    environment:
+      SERVICE: ${self:service}
+      STAGE: ${self:provider.stage}
+      REGION: ${self:provider.region}
+      NO_COLOR: ${env:NO_COLOR, 'true'}
+      IS_LOCAL_DDB: ${env:IS_LOCAL_DDB, 'false'}
+      API_KEYS: ${file(./serverless/config.${opt:stage, 'dev'}.json):API_KEYS}
+      JWT_SECRET: ${file(./serverless/config.${opt:stage, 'dev'}.json):JWT_SECRET}
+
+    apiGateway:
+      shouldStartNameWithService: true
+    deploymentBucket:
+      name: ${self:service}-${self:provider.stage}-${self:provider.region}-slsbucket
+
+
+    iam: 
+      role: 
+        statements: 
+            - Effect: 'Allow'
+              Action: 
+                - 'dynamodb:DescribeTable'
+                - 'dynamodb:Query'
+                - 'dynamodb:Scan'
+                - 'dynamodb:GetItem'
+                - 'dynamodb:PutItem'
+                - 'dynamodb:UpdateItem'
+                - 'dynamodb:DeleteItem'
+
+              Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+
+custom: 
+  dynamodb: 
+    stages:
+      - ${self:provider.stage}
+    start:
+      port: 6000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: ${self:custom.seed.test.table}
+            sources: ${self:custom.seed.test.sources}
+
+  seed:
+    test:
+      table: ${self:service}-${self:provider.stage}-Users-table
+      sources:
+        - ./serverless/resources/users-${self:provider.stage}.json
+
+functions:
+  app:
+    handler: src/serverless.handler
+    events:
+      - http:
+          cors: true
+          path: '{proxy+}'
+          method: any
+
+resources:
+  - ${file(serverless/resources/ddb-users-table.yml)}
+  - ${file(serverless/resources/ddb-emails-users-table.yml)}
+  - ${file(serverless/resources/ddb-students-table.yml)}
+  - ${file(serverless/resources/ddb-emails-students-table.yml)}

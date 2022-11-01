@@ -1,0 +1,4 @@
+{
+    "API_KEYS": "[\"YOUR_FIRST_API_KEY\"]",
+    "JWT_SECRET": "YOUR_JWT_SECRET"
+}

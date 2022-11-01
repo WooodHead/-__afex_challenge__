@@ -1,0 +1,38 @@
+[
+    {
+        "id": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50",
+        "fullName": "Admin Afex",
+        "email": "admin@afex.test",
+        "password": "$2b$10$bwFdEV..10K74BFBrGGmBe51oCCLXs/ELzgQk1BuiyhfoL3LrQy56",
+        "roles": ["user","admin"],
+        "_status": "active",
+        "_idCreator": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50",
+        "_createdAt": "2022-10-31T00:45:32.584Z",
+        "_idLastModificator": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50",
+        "_updatedAt": "2022-10-31T00:45:32.701Z"
+    },
+    {
+        "id": "279a7a96-4980-49b7-be86-1543d41fdcb2",
+        "fullName": "User Afex",
+        "email": "user@afex.test",
+        "password": "$2b$10$Z6HcCZzLJ78Be7czZ0l3h.knGYu8lh5bcLqO9pc0hvBAhUiI4s2sS",
+        "roles": ["user"],
+        "_idCreator": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50",
+        "_createdAt": "2022-10-31T00:45:32.527Z",
+        "_idLastModificator": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50",
+        "_updatedAt": "2022-10-31T00:45:32.681Z",
+        "_status": "active"
+    },
+    {
+        "id": "75f5dcdb-2d7f-4e76-ae13-8cbedeca6e4b",
+        "fullName": "Unknown user",
+        "email": "unknown@afex.test",
+        "password": "$2b$10$aqPN7q6XMS9bzkQbZW0lg.T1SgOVO4tQATAm.Xqyz4XO3UHmRm.Sq",
+        "roles": [],
+        "_status": "active",
+        "_idCreator": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50",
+        "_createdAt": "2022-10-31T00:45:32.584Z",
+        "_updatedAt": "2022-10-31T00:45:32.701Z",
+        "_idLastModificator": "b9b0b23f-5f2c-4dee-ade4-2ba8422f2c50"
+      }
+]

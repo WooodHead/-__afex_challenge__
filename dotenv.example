@@ -1,0 +1,7 @@
+SERVICE=YOUR_SERVICE_NAME
+STAGE=dev
+REGION=YOUR_AWS_REGION
+JWT_SECRET=YOUR_JWT_SECRET
+API_KEYS=["YOUR_FIRST_API_KEY"]
+IS_LOCAL_DDB=true
+DDB_LOCAL_ENDPOINT=http://localhost:6000/shell # Preconfigured in serverless.yml for local dynamodb

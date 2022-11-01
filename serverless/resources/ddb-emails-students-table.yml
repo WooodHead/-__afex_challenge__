@@ -1,0 +1,27 @@
+Resources:
+  EmailsStudentsTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-EmailsStudents-table
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1  
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: idStudent
+          AttributeType: S
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: studentIndex
+          KeySchema:
+            - AttributeName: idStudent
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput: 
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1  
